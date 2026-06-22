@@ -201,36 +201,29 @@ footer p {
     place-items: center;
     padding: 6rem 1.5rem;
     color: var(--white);
-    text-align: center;
     background:
-        radial-gradient(circle at 20% 20%,
-            rgba(217, 130, 43, 0.18),
-            transparent 35%),
-        linear-gradient(rgba(8, 32, 24, 0.74),
-            rgba(8, 32, 24, 0.9)),
-        linear-gradient(135deg,
-            #2d6b4b,
-            var(--forest-deep));
-}
-
-.hero::before {
-    position: absolute;
-    inset: 0;
-    content: "";
-    opacity: 0.16;
-    background-image:
-        linear-gradient(30deg,
-            transparent 24%,
-            rgba(255, 255, 255, 0.12) 25%,
-            transparent 26%);
-    background-size: 38px 38px;
-    pointer-events: none;
+        linear-gradient(90deg,
+            rgba(8, 32, 24, 0.94) 0%,
+            rgba(8, 32, 24, 0.78) 38%,
+            rgba(8, 32, 24, 0.35) 68%,
+            rgba(8, 32, 24, 0.2) 100%),
+        url("/images/terraquest-hero.png") center center / cover no-repeat;
 }
 
 .hero-content {
     position: relative;
     z-index: 1;
-    width: min(780px, 100%);
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    text-align: left;
+}
+
+.hero-content>* {
+    max-width: 680px;
+}
+
+.hero-description {
+    margin-left: 0;
 }
 
 .hero-eyebrow,
@@ -261,7 +254,7 @@ footer p {
 
 .hero-actions {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1rem;
     margin-top: 2rem;
 }
@@ -397,6 +390,40 @@ footer p {
     .hero-actions {
         align-items: stretch;
         flex-direction: column;
+    }
+}
+
+@media (max-width: 850px) {
+    /* menú móvil */
+}
+
+@media (max-width: 750px) {
+    .hero {
+        min-height: 78vh;
+        padding: 5rem 1.5rem;
+        background:
+            linear-gradient(rgba(8, 32, 24, 0.76),
+                rgba(8, 32, 24, 0.88)),
+            url("/images/terraquest-hero.png") 68% center / cover no-repeat;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-content>* {
+        max-width: 100%;
+    }
+
+    .hero-description {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+        justify-content: center;
     }
 }
 
@@ -1021,5 +1048,75 @@ footer p {
         right: auto;
         left: 0;
         width: 100%;
+    }
+}
+
+/* Desktop layout refinement */
+
+@media (min-width: 851px) {
+    .main-navigation {
+        display: grid;
+        grid-template-columns: auto 1fr minmax(220px, 290px);
+        gap: 2rem;
+        min-height: 92px;
+    }
+
+    .navigation-links {
+        justify-content: center;
+        gap: 1.15rem;
+    }
+
+    .navigation-links a {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    .site-search {
+        width: 100%;
+        max-width: 290px;
+    }
+
+    .hero {
+        min-height: 74vh;
+        padding: 6.5rem 2rem;
+        background:
+            linear-gradient(90deg,
+                rgba(8, 32, 24, 0.92) 0%,
+                rgba(8, 32, 24, 0.78) 32%,
+                rgba(8, 32, 24, 0.42) 55%,
+                rgba(8, 32, 24, 0.08) 78%,
+                rgba(8, 32, 24, 0.02) 100%),
+            url("/images/terraquest-hero.png") center center / cover no-repeat;
+    }
+
+    .hero-content {
+        width: min(1180px, 100%);
+    }
+
+    .hero-content>* {
+        max-width: 610px;
+    }
+
+    .hero h1 {
+        max-width: 590px;
+        font-size: clamp(3.4rem, 5.5vw, 5.7rem);
+        line-height: 0.94;
+    }
+
+    .hero-description {
+        max-width: 540px;
+        margin-top: 1.5rem;
+        margin-left: 0;
+        font-size: 1.08rem;
+    }
+
+    .hero-actions {
+        margin-top: 1.75rem;
+    }
+
+    .primary-button,
+    .secondary-button {
+        padding: 0.95rem 1.5rem;
+        font-size: 0.95rem;
     }
 }
