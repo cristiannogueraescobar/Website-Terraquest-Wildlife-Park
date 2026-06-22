@@ -466,6 +466,12 @@ app.get("/api/search", async (req, res) => {
     }
 });
 
+app.use((req, res) => {
+    res.status(404).render("404", {
+        pageTitle: "Page Not Found"
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);
 });
