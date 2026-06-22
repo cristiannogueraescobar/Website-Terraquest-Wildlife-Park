@@ -5,115 +5,143 @@ import db, {
 
 const experiences = [
     {
-        habitat: "Rainforest Canopy",
-        name: "Canopy Discovery Trail",
+        habitat: "The Last Forest",
+        name: "Forest Guardian Trail",
         type: "Adventure Trail",
-        short: "Explore the different levels of the rainforest canopy.",
-        full: "Follow an elevated trail through tropical vegetation while discovering how animals live at different levels of the rainforest.",
-        image: "canopy-trail.jpg",
-        alt: "Visitors walking along an elevated rainforest trail"
+        short: "Follow tracks and signs through the protected forest.",
+        full: "Visitors follow a guided trail through dense vegetation while learning how endangered forest animals are monitored and protected.",
+        image: "forest-guardian-trail.jpg",
+        alt: "Visitors following a wildlife trail through a dense forest"
     },
     {
-        habitat: "Rainforest Canopy",
-        name: "Tropical Bird Encounter",
+        habitat: "The Last Forest",
+        name: "Endangered Species Lookout",
         type: "Animal Exhibit",
-        short: "Observe colourful tropical birds in a natural environment.",
-        full: "Discover tropical bird species and learn about their behaviour, diet and role within rainforest ecosystems.",
-        image: "tropical-birds.jpg",
-        alt: "A colourful tropical bird sitting on a rainforest branch"
+        short: "Observe threatened forest species from a quiet viewing area.",
+        full: "A calm observation point allows visitors to watch protected wildlife while learning about habitat loss and conservation programmes.",
+        image: "forest-lookout.jpg",
+        alt: "A protected forest animal viewed from a quiet observation platform"
     },
     {
-        habitat: "Rainforest Canopy",
-        name: "Rainforest Sound Station",
-        type: "Interactive Experience",
-        short: "Listen to and identify sounds from the rainforest.",
-        full: "Use an interactive sound station to identify birds, insects and other animals that communicate across the rainforest.",
-        image: "rainforest-sounds.jpg",
-        alt: "A child using an interactive rainforest sound station"
-    },
-
-    {
-        habitat: "Savannah Plains",
-        name: "Giraffe Observation Deck",
-        type: "Animal Exhibit",
-        short: "View giraffes from an elevated observation platform.",
-        full: "Observe giraffes across the open grasslands while learning about their feeding habits and conservation.",
-        image: "giraffe-deck.jpg",
-        alt: "Giraffes viewed from an elevated observation deck"
-    },
-    {
-        habitat: "Savannah Plains",
-        name: "Junior Safari Trail",
-        type: "Adventure Trail",
-        short: "Follow animal tracks through the savannah.",
-        full: "Young explorers can follow tracks and clues to discover which animals live across the Savannah Plains.",
-        image: "safari-trail.jpg",
-        alt: "Children following animal tracks on a safari trail"
-    },
-    {
-        habitat: "Savannah Plains",
-        name: "Savannah Ranger Talk",
+        habitat: "The Last Forest",
+        name: "Conservation Ranger Talk",
         type: "Educational Talk",
-        short: "Learn how wildlife survives in open grasslands.",
-        full: "Park rangers explain animal adaptations, food chains and conservation work across savannah environments.",
-        image: "ranger-talk.jpg",
-        alt: "A wildlife ranger speaking to visitors near the savannah"
+        short: "Learn how rangers protect threatened species.",
+        full: "TerraQuest rangers explain tracking, rescue work and the challenges involved in protecting endangered forest animals.",
+        image: "forest-ranger-talk.jpg",
+        alt: "A conservation ranger speaking to visitors in a forest habitat"
     },
 
     {
-        habitat: "Reptile Realm",
-        name: "Snake Discovery Exhibit",
+        habitat: "The Golden Reserve",
+        name: "Savannah Observation Deck",
         type: "Animal Exhibit",
-        short: "Discover snakes from different natural environments.",
-        full: "Learn how snakes move, hunt and survive while observing them safely in carefully designed habitats.",
-        image: "snake-exhibit.jpg",
-        alt: "A snake resting inside a natural reptile habitat"
+        short: "View large savannah animals from an elevated platform.",
+        full: "Visitors can observe grazing animals and learn how species share resources across the African savannah.",
+        image: "savannah-observation.jpg",
+        alt: "Visitors observing savannah animals from an elevated platform"
     },
     {
-        habitat: "Reptile Realm",
-        name: "Reptile Keeper Talk",
-        type: "Educational Talk",
-        short: "Meet a reptile keeper and learn about animal care.",
-        full: "A specialist keeper explains how reptiles are cared for and why they are important to natural ecosystems.",
-        image: "reptile-talk.jpg",
-        alt: "A reptile keeper explaining animal care to visitors"
-    },
-    {
-        habitat: "Reptile Realm",
-        name: "Cold-Blooded Challenge",
+        habitat: "The Golden Reserve",
+        name: "Rhino Conservation Station",
         type: "Interactive Experience",
-        short: "Test your knowledge of reptiles and their adaptations.",
-        full: "Complete interactive questions about reptile behaviour, body temperature and survival adaptations.",
-        image: "reptile-challenge.jpg",
-        alt: "A visitor completing an interactive reptile challenge"
+        short: "Discover how conservation teams protect rhinoceroses.",
+        full: "Interactive displays explain anti-poaching work, habitat protection and the importance of monitoring rhino populations.",
+        image: "rhino-conservation.jpg",
+        alt: "An interactive conservation display about rhinoceroses"
+    },
+    {
+        habitat: "The Golden Reserve",
+        name: "Golden Plains Ranger Talk",
+        type: "Educational Talk",
+        short: "Learn how savannah animals survive in a changing environment.",
+        full: "A ranger explains migration, food chains, water shortages and the relationship between predators and prey.",
+        image: "golden-plains-talk.jpg",
+        alt: "A wildlife ranger speaking beside a savannah habitat"
     },
 
     {
-        habitat: "Wetland Expedition",
-        name: "Wetland Boardwalk",
+        habitat: "Predator Territory",
+        name: "Predator Viewing Tunnel",
+        type: "Animal Exhibit",
+        short: "Observe powerful predators from a secure viewing tunnel.",
+        full: "A reinforced viewing tunnel allows visitors to watch predators safely while learning about their behaviour and natural role.",
+        image: "predator-tunnel.jpg",
+        alt: "Visitors watching a predator through a secure glass tunnel"
+    },
+    {
+        habitat: "Predator Territory",
+        name: "Night Hunter Experience",
+        type: "Interactive Experience",
+        short: "Discover how predators use sound, movement and darkness.",
+        full: "Interactive displays demonstrate how predators detect prey, move silently and adapt to low-light environments.",
+        image: "night-hunter.jpg",
+        alt: "A visitor using an interactive display about nocturnal predators"
+    },
+    {
+        habitat: "Predator Territory",
+        name: "Predator Keeper Talk",
+        type: "Educational Talk",
+        short: "Learn how dangerous animals are cared for safely.",
+        full: "A specialist keeper explains enclosure design, feeding routines, animal welfare and public safety.",
+        image: "predator-keeper-talk.jpg",
+        alt: "A specialist keeper presenting information about predator care"
+    },
+
+    {
+        habitat: "River of Life",
+        name: "Wetland Discovery Boardwalk",
         type: "Adventure Trail",
-        short: "Walk across the wetland and observe wildlife safely.",
-        full: "Follow a wooden boardwalk through ponds and vegetation while discovering the importance of wetland ecosystems.",
+        short: "Explore freshwater habitats from a raised boardwalk.",
+        full: "Visitors follow a boardwalk through wetland vegetation and discover species that depend on clean freshwater.",
         image: "wetland-boardwalk.jpg",
-        alt: "A wooden visitor boardwalk crossing a wetland"
+        alt: "A raised wooden boardwalk crossing a wetland habitat"
     },
     {
-        habitat: "Wetland Expedition",
-        name: "Otter Observation Point",
+        habitat: "River of Life",
+        name: "Aquatic Rescue Centre",
         type: "Animal Exhibit",
-        short: "Watch otters swimming, playing and exploring.",
-        full: "Observe otters from a quiet viewing area and learn about their behaviour, diet and habitat requirements.",
-        image: "otter-observation.jpg",
-        alt: "An otter swimming near a wetland observation point"
+        short: "Learn how injured and threatened aquatic animals are supported.",
+        full: "The rescue centre explains rehabilitation, water quality and the challenges faced by freshwater wildlife.",
+        image: "aquatic-rescue.jpg",
+        alt: "A wildlife keeper caring for an aquatic animal"
     },
     {
-        habitat: "Wetland Expedition",
-        name: "Pond Explorer Station",
+        habitat: "River of Life",
+        name: "Water Conservation Lab",
         type: "Interactive Experience",
-        short: "Discover the small animals that live in freshwater ponds.",
-        full: "Use interactive displays to identify insects, amphibians and other species that depend on healthy ponds.",
-        image: "pond-explorer.jpg",
-        alt: "Children exploring freshwater wildlife at an activity station"
+        short: "Test how pollution affects freshwater ecosystems.",
+        full: "Visitors use interactive controls to see how waste, chemicals and water use influence plants and animals.",
+        image: "water-conservation-lab.jpg",
+        alt: "A child using an interactive freshwater conservation display"
+    },
+
+    {
+        habitat: "Little Rangers Village",
+        name: "Supervised Animal Feeding",
+        type: "Family Activity",
+        short: "Help feed selected animals under keeper supervision.",
+        full: "Younger visitors can safely feed approved animals while learning about nutrition and responsible animal care.",
+        image: "animal-feeding.jpg",
+        alt: "A child feeding a friendly animal with a keeper"
+    },
+    {
+        habitat: "Little Rangers Village",
+        name: "Junior Keeper Workshop",
+        type: "Interactive Experience",
+        short: "Learn how keepers care for animals every day.",
+        full: "Children complete simple keeper tasks such as preparing food, identifying equipment and learning hygiene rules.",
+        image: "junior-keeper.jpg",
+        alt: "Children taking part in a supervised junior keeper workshop"
+    },
+    {
+        habitat: "Little Rangers Village",
+        name: "Animal Care Demonstration",
+        type: "Educational Talk",
+        short: "Watch a keeper demonstrate safe animal care.",
+        full: "A keeper demonstrates grooming, health checks and respectful interaction with calm domestic animals.",
+        image: "animal-care-demo.jpg",
+        alt: "A keeper demonstrating animal care to children"
     }
 ];
 

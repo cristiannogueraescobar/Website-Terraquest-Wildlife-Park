@@ -12,48 +12,59 @@ const db = new sqlite.Database(databasePath);
 
 const habitats = [
     {
-        name: "Rainforest Canopy",
-        slug: "rainforest-canopy",
+        name: "The Last Forest",
+        slug: "the-last-forest",
         short_description:
-            "Explore a tropical habitat filled with colourful birds, monkeys and rainforest wildlife.",
+            "Enter an Asian forest sanctuary created for threatened wildlife.",
         full_description:
-            "The Rainforest Canopy recreates a warm and humid tropical environment. Visitors can discover animals living at different levels of the forest while learning about biodiversity and rainforest conservation.",
-        image_filename: "rainforest-canopy.jpg",
+            "The Last Forest recreates the dense forests and mountain landscapes of Asia. It provides carefully designed environments for threatened species while helping visitors understand habitat loss, illegal wildlife trade and conservation.",
+        image_filename: "the-last-forest.jpg",
         image_alt:
-            "A tropical rainforest habitat with dense green plants and a wooden visitor walkway"
+            "A dense Asian forest habitat surrounded by trees, rocks and mist"
     },
     {
-        name: "Savannah Plains",
-        slug: "savannah-plains",
+        name: "The Golden Reserve",
+        slug: "the-golden-reserve",
         short_description:
-            "Discover open grasslands inspired by the African savannah.",
+            "Explore open African grasslands and meet some of the world’s most recognisable animals.",
         full_description:
-            "The Savannah Plains provide large open spaces for wildlife and panoramic observation areas for visitors. The habitat explains how animals survive in hot climates and how conservation projects protect endangered species.",
-        image_filename: "savannah-plains.jpg",
+            "The Golden Reserve is inspired by the African savannah. Large open areas, shaded shelters and observation points allow visitors to discover how animals survive and interact within this important ecosystem.",
+        image_filename: "the-golden-reserve.jpg",
         image_alt:
-            "Giraffes walking across an open grassland habitat"
+            "African savannah grassland with wildlife beneath golden sunlight"
     },
     {
-        name: "Reptile Realm",
-        slug: "reptile-realm",
+        name: "Predator Territory",
+        slug: "predator-territory",
         short_description:
-            "Meet reptiles from different ecosystems in a safe and educational environment.",
+            "Observe powerful predators from secure and immersive viewing areas.",
         full_description:
-            "Reptile Realm introduces visitors to snakes, lizards and other reptiles. Interactive displays explain their behaviour, habitats and importance within natural ecosystems.",
-        image_filename: "reptile-realm.jpg",
+            "Predator Territory introduces visitors to dangerous animals from different parts of the world. Each species is housed in a separate environment designed around its natural behaviour, welfare and security requirements.",
+        image_filename: "predator-territory.jpg",
         image_alt:
-            "A green reptile resting on a branch inside a natural habitat"
+            "A large predator walking through a secure naturalistic habitat"
     },
     {
-        name: "Wetland Expedition",
-        slug: "wetland-expedition",
+        name: "River of Life",
+        slug: "river-of-life",
         short_description:
-            "Follow the wetland boardwalk and discover animals that depend on water.",
+            "Discover the wildlife that depends on rivers, wetlands and freshwater ecosystems.",
         full_description:
-            "Wetland Expedition includes ponds, natural vegetation and observation points. Visitors can learn about wetland ecosystems, water conservation and the species that depend on these environments.",
-        image_filename: "wetland-expedition.jpg",
+            "River of Life contains ponds, flowing water, wetland vegetation and observation paths. The habitat explains why freshwater ecosystems are important and how pollution and habitat destruction affect aquatic wildlife.",
+        image_filename: "river-of-life.jpg",
         image_alt:
-            "A wooden boardwalk crossing a green wetland habitat"
+            "A wooden walkway passing through a green wetland and river habitat"
+    },
+    {
+        name: "Little Rangers Village",
+        slug: "little-rangers-village",
+        short_description:
+            "A supervised animal experience designed especially for younger visitors.",
+        full_description:
+            "Little Rangers Village gives children the opportunity to learn about animal care through safe and supervised activities. The area includes calm domestic animals, hand-washing facilities and clear guidance from trained keepers.",
+        image_filename: "little-rangers-village.jpg",
+        image_alt:
+            "Children learning about friendly farm animals with a wildlife keeper"
     }
 ];
 
