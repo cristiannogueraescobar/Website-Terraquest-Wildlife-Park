@@ -224,6 +224,11 @@ app.post("/api/contact", async (req, res) => {
         });
     }
 });
+app.get("/activity", (req, res) => {
+    res.render("activity", {
+        pageTitle: "Wildlife Rescue Mission"
+    });
+});
 
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);

@@ -1,0 +1,71 @@
+<%- include("partials/header") %>
+    <%- include("partials/navigation") %>
+
+        <main class="page-main">
+            <section class="page-introduction">
+                <p class="section-label">Become a wildlife guardian</p>
+                <h1>Wildlife Rescue Mission</h1>
+
+                <p>
+                    Make responsible decisions, protect threatened animals
+                    and discover whether you have what it takes to become
+                    a TerraQuest Wildlife Guardian.
+                </p>
+            </section>
+
+            <section id="rescue-game" class="rescue-game" aria-labelledby="mission-heading">
+                <div id="game-introduction">
+                    <h2 id="mission-heading">Your mission begins here</h2>
+
+                    <p>
+                        You will face five wildlife emergencies from different
+                        areas of TerraQuest. Choose the safest and most responsible
+                        response in each situation.
+                    </p>
+
+                    <button id="start-game" class="primary-button" type="button">
+                        Start mission
+                    </button>
+                </div>
+
+                <div id="question-screen" hidden>
+                    <div class="mission-progress">
+                        <p id="progress-text">Mission 1 of 5</p>
+
+                        <div class="progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="5"
+                            aria-valuenow="1">
+                            <div id="progress-bar" class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <p id="habitat-name" class="experience-type"></p>
+
+                    <h2 id="question-text"></h2>
+
+                    <div id="answer-options" class="answer-options" aria-label="Mission choices"></div>
+
+                    <div id="answer-feedback" class="answer-feedback" aria-live="polite"></div>
+
+                    <button id="next-question" class="primary-button" type="button" hidden>
+                        Continue mission
+                    </button>
+                </div>
+
+                <div id="result-screen" hidden>
+                    <p class="section-label">Mission complete</p>
+
+                    <h2 id="result-title"></h2>
+
+                    <p id="final-score"></p>
+                    <p id="result-message"></p>
+
+                    <button id="restart-game" class="primary-button" type="button">
+                        Restart mission
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <script src="/js/activity.js" defer></script>
+
+        <%- include("partials/footer") %>
