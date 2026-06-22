@@ -1,7 +1,7 @@
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { getAll, getOne } from "./database/database.mjs";
+import { getAll, getOne, runQuery } from "./database/database.mjs";
 
 const app = express();
 const PORT = 5000;
@@ -130,6 +130,98 @@ app.get("/faq", async (req, res) => {
     } catch (error) {
         console.error("Unable to retrieve FAQs:", error.message);
         res.status(500).send("Unable to load frequently asked questions.");
+    }
+});
+
+app.get("/contact", (req, res) => {
+    res.render("contact", {
+        pageTitle: "Contact"
+    });
+});
+
+app.post("/api/contact", async (req, res) => {
+    try {
+        const { name, email, subject, message, consent } = req.body;
+
+        const trimmedName = name?.trim();
+        const trimmedEmail = email?.trim();
+        const trimmedSubject = subject?.trim();
+        const trimmedMessage = message?.trim();
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (
+            !trimmedName ||
+            trimmedName.length < 2 ||
+            trimmedName.length > 80
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "Please enter a valid name."
+            });
+        }
+
+        if (!emailPattern.test(trimmedEmail)) {
+            return res.status(400).json({
+                success: false,
+                message: "Please enter a valid email address."
+            });
+        }
+
+        if (!trimmedSubject || trimmedSubject.length > 100) {
+            return res.status(400).json({
+                success: false,
+                message: "Please select a valid subject."
+            });
+        }
+
+        if (
+            !trimmedMessage ||
+            trimmedMessage.length < 10 ||
+            trimmedMessage.length > 1000
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: "Your message must contain between 10 and 1000 characters."
+            });
+        }
+
+        if (consent !== true) {
+            return res.status(400).json({
+                success: false,
+                message: "Please confirm that your information may be processed."
+            });
+        }
+
+        await runQuery(
+            `
+                INSERT INTO contact_messages (
+                    name,
+                    email,
+                    subject,
+                    message
+                )
+                VALUES (?, ?, ?, ?)
+            `,
+            [
+                trimmedName,
+                trimmedEmail,
+                trimmedSubject,
+                trimmedMessage
+            ]
+        );
+
+        res.status(201).json({
+            success: true,
+            message: "Thank you. Your message has been received."
+        });
+    } catch (error) {
+        console.error("Unable to save contact message:", error.message);
+
+        res.status(500).json({
+            success: false,
+            message: "Your message could not be sent. Please try again."
+        });
     }
 });
 

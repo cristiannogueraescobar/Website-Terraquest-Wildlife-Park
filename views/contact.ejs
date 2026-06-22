@@ -1,0 +1,82 @@
+<%- include("partials/header") %>
+    <%- include("partials/navigation") %>
+
+        <main class="page-main">
+            <section class="page-introduction">
+                <p class="section-label">Speak to our team</p>
+                <h1>Contact TerraQuest</h1>
+
+                <p>
+                    Send us a question about accessibility, park experiences,
+                    conservation work or visitor facilities.
+                </p>
+            </section>
+
+            <section class="contact-section">
+                <form id="contact-form" class="contact-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Full name</label>
+
+                        <input id="name" name="name" type="text" minlength="2" maxlength="80" autocomplete="name"
+                            required>
+
+                        <p class="field-error" id="name-error"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+
+                        <input id="email" name="email" type="email" maxlength="150" autocomplete="email" required>
+
+                        <p class="field-error" id="email-error"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="General enquiry">General enquiry</option>
+                            <option value="Accessibility">Accessibility</option>
+                            <option value="Conservation">Conservation</option>
+                            <option value="Park experiences">Park experiences</option>
+                            <option value="Little Rangers Village">
+                                Little Rangers Village
+                            </option>
+                        </select>
+
+                        <p class="field-error" id="subject-error"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+
+                        <textarea id="message" name="message" rows="7" minlength="10" maxlength="1000"
+                            required></textarea>
+
+                        <p class="field-error" id="message-error"></p>
+                    </div>
+
+                    <div class="consent-group">
+                        <input id="consent" name="consent" type="checkbox" required>
+
+                        <label for="consent">
+                            I agree that TerraQuest may process this information
+                            to respond to my enquiry.
+                        </label>
+                    </div>
+
+                    <p class="field-error" id="consent-error"></p>
+
+                    <button class="primary-button" type="submit">
+                        Send message
+                    </button>
+
+                    <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </section>
+        </main>
+
+        <script src="/js/contact.js" defer></script>
+
+        <%- include("partials/footer") %>
