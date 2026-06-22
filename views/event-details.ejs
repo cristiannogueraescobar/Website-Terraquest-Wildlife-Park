@@ -1,0 +1,83 @@
+<%- include("partials/header") %>
+    <%- include("partials/navigation") %>
+
+        <main class="page-main">
+            <article class="event-detail">
+                <p class="section-label">
+                    <%= event.category_name %>
+                </p>
+
+                <p class="event-status
+            <%= eventStatus === " Past event" ? "event-status-past" : eventStatus==="Currently running"
+                    ? "event-status-current" : "event-status-upcoming" %>">
+                    <%= eventStatus %>
+                </p>
+
+                <h1>
+                    <%= event.title %>
+                </h1>
+
+                <% if (event.event_type==="recurring" ) { %>
+                    <p class="event-detail-schedule">
+                        <strong>
+                            <%= event.recurrence_text %>
+                        </strong>
+                        at <%= event.start_time %>
+                    </p>
+
+                    <p>
+                        Available from
+                        <%= new Date(event.start_date + "T00:00:00" ).toLocaleDateString("en-GB", { day: "numeric" ,
+                            month: "long" , year: "numeric" }) %>
+                            to
+                            <%= new Date(event.end_date + "T00:00:00" ).toLocaleDateString("en-GB", { day: "numeric" ,
+                                month: "long" , year: "numeric" }) %>.
+                    </p>
+                    <% } else { %>
+                        <p class="event-detail-schedule">
+                            <strong>
+                                <%= new Date(event.start_date + "T00:00:00" ).toLocaleDateString("en-GB", {
+                                    day: "numeric" , month: "long" , year: "numeric" }) %>
+                            </strong>
+
+                            <% if (event.end_date && event.end_date !==event.start_date) { %>
+                                to
+                                <strong>
+                                    <%= new Date(event.end_date + "T00:00:00" ).toLocaleDateString("en-GB", {
+                                        day: "numeric" , month: "long" , year: "numeric" }) %>
+                                </strong>
+                                <% } %>
+
+                                    at <%= event.start_time %>
+                        </p>
+                        <% } %>
+
+                            <p class="event-detail-location">
+                                Location: <strong>
+                                    <%= event.location %>
+                                </strong>
+                            </p>
+
+                            <div class="event-detail-description">
+                                <p>
+                                    <%= event.full_description %>
+                                </p>
+                            </div>
+
+                            <% if (eventStatus==="Past event" ) { %>
+                                <div class="past-event-notice">
+                                    <h2>This event has ended</h2>
+                                    <p>
+                                        This activity is no longer running. Visit the events page
+                                        to discover current and upcoming experiences.
+                                    </p>
+                                </div>
+                                <% } %>
+
+                                    <a class="back-link" href="/events">
+                                        ← Back to all events
+                                    </a>
+            </article>
+        </main>
+
+        <%- include("partials/footer") %>

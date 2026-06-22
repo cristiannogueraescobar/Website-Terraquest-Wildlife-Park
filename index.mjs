@@ -340,6 +340,52 @@ app.get("/api/events", async (req, res) => {
     }
 });
 
+app.get("/events/:slug", async (req, res) => {
+    try {
+        const event = await getOne(
+            `
+                SELECT
+                    events.*,
+                    event_categories.name AS category_name
+                FROM events
+                INNER JOIN event_categories
+                    ON events.category_id = event_categories.category_id
+                WHERE events.slug = ?
+            `,
+            [req.params.slug]
+        );
+
+        if (!event) {
+            return res.status(404).send("Event not found.");
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const startDate = new Date(`${event.start_date}T00:00:00`);
+        const endDate = event.end_date
+            ? new Date(`${event.end_date}T00:00:00`)
+            : startDate;
+
+        let eventStatus = "Upcoming event";
+
+        if (endDate < today) {
+            eventStatus = "Past event";
+        } else if (startDate <= today && endDate >= today) {
+            eventStatus = "Currently running";
+        }
+
+        res.render("event-details", {
+            pageTitle: event.title,
+            event,
+            eventStatus
+        });
+    } catch (error) {
+        console.error("Unable to retrieve event:", error.message);
+        res.status(500).send("Unable to load event.");
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);
 });
