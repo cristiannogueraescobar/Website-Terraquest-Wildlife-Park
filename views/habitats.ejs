@@ -4,6 +4,7 @@
         <main class="page-main">
             <section class="page-introduction">
                 <p class="section-label">Explore TerraQuest</p>
+
                 <h1>Wildlife habitats</h1>
 
                 <p>
@@ -13,20 +14,31 @@
             </section>
 
             <section class="habitat-grid" aria-label="TerraQuest habitats">
-                <% habitats.forEach((habitat)=> { %>
-                    <article class="habitat-card">
+                <% habitats.forEach((habitat, index)=> { %>
+                    <article class="habitat-card <%= index === habitats.length - 1 ? 'habitat-card-featured' : '' %>">
+                        <img class="habitat-card-image" src="/images/<%= habitat.slug %>.png"
+                            alt="<%= habitat.name %> wildlife habitat">
+
+                        <div class="habitat-card-overlay"></div>
+
                         <div class="habitat-card-content">
-                            <h2>
-                                <%= habitat.name %>
-                            </h2>
+                            <% if (index===habitats.length - 1) { %>
+                                <p class="habitat-card-label">
+                                    Family experience
+                                </p>
+                                <% } %>
 
-                            <p>
-                                <%= habitat.short_description %>
-                            </p>
+                                    <h2>
+                                        <%= habitat.name %>
+                                    </h2>
 
-                            <a class="card-link" href="/habitats/<%= habitat.slug %>">
-                                Explore this habitat
-                            </a>
+                                    <p>
+                                        <%= habitat.short_description %>
+                                    </p>
+
+                                    <a class="habitat-card-link" href="/habitats/<%= habitat.slug %>">
+                                        Explore this habitat
+                                    </a>
                         </div>
                     </article>
                     <% }) %>

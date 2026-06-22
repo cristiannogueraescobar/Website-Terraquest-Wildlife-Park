@@ -439,28 +439,134 @@ footer p {
     text-align: center;
 }
 
+/* Habitat image cards */
+
 .habitat-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem;
 }
 
 .habitat-card {
+    position: relative;
+    min-height: 390px;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid var(--border-soft);
+    border-radius: 1rem;
+    background-color: var(--forest-deep);
+    box-shadow: var(--shadow-soft);
+    isolation: isolate;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.habitat-card-featured {
+    grid-column: 1 / -1;
+    min-height: 460px;
+}
+
+.habitat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2.2rem rgba(15, 47, 36, 0.18);
+}
+
+.habitat-card-image {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+}
+
+.habitat-card:hover .habitat-card-image {
+    transform: scale(1.04);
+}
+
+.habitat-card-overlay {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background:
+        linear-gradient(180deg,
+            rgba(8, 32, 24, 0.08) 10%,
+            rgba(8, 32, 24, 0.42) 55%,
+            rgba(8, 32, 24, 0.9) 100%);
+}
+
+.habitat-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: inherit;
     padding: 2rem;
-    border-radius: 0.75rem;
-    background-color: #ffffff;
-    box-shadow: 0 0.5rem 1.5rem rgba(18, 61, 42, 0.1);
+    color: var(--white);
+    text-align: left;
+}
+
+.habitat-card-featured .habitat-card-content {
+    max-width: 720px;
+    padding: 3rem;
+}
+
+.habitat-card-label {
+    margin: 0 0 0.5rem;
+    color: #ffd2a1;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
 
 .habitat-card h2 {
-    color: #123d2a;
+    margin: 0;
+    color: var(--white);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
 }
 
-.card-link {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #123d2a;
-    font-weight: 700;
+.habitat-card-content p {
+    max-width: 620px;
+    margin: 0.8rem 0 0;
+    color: #edf4ef;
+}
+
+.habitat-card-link {
+    align-self: flex-start;
+    margin-top: 1.2rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 2px solid var(--amber);
+    color: var(--white);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.habitat-card-link:hover,
+.habitat-card-link:focus-visible {
+    color: #ffd2a1;
+}
+
+@media (max-width: 760px) {
+    .habitat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .habitat-card-featured {
+        grid-column: auto;
+    }
+
+    .habitat-card,
+    .habitat-card-featured {
+        min-height: 360px;
+    }
+
+    .habitat-card-content,
+    .habitat-card-featured .habitat-card-content {
+        padding: 1.6rem;
+    }
 }
 
 .card-link:hover {
