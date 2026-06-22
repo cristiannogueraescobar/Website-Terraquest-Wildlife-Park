@@ -276,3 +276,49 @@ footer p {
         flex-direction: column;
     }
 }
+
+.page-main {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+}
+
+.page-introduction {
+    max-width: 750px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.habitat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.habitat-card {
+    padding: 2rem;
+    border-radius: 0.75rem;
+    background-color: #ffffff;
+    box-shadow: 0 0.5rem 1.5rem rgba(18, 61, 42, 0.1);
+}
+
+.habitat-card h2 {
+    color: #123d2a;
+}
+
+.card-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #123d2a;
+    font-weight: 700;
+}
+
+.card-link:hover {
+    color: #8a6814;
+}
+
+@media (max-width: 700px) {
+    .habitat-grid {
+        grid-template-columns: 1fr;
+    }
+}
