@@ -712,3 +712,17 @@ footer p {
         grid-template-columns: 1fr;
     }
 }
+
+.event-status-current {
+    color: #6b4b00;
+    background-color: #fff0b8;
+}
+
+.event-schedule,
+.event-date-range {
+    font-weight: 700;
+}
+
+.event-date-range {
+    color: #53665a;
+}

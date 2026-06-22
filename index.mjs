@@ -270,8 +270,12 @@ app.get("/api/events", async (req, res) => {
                 events.title,
                 events.slug,
                 events.short_description,
-                events.event_date,
+                events.event_type,
+                events.start_date,
+                events.end_date,
                 events.start_time,
+                events.recurrence_text,
+                events.day_of_week,
                 events.location,
                 events.image_filename,
                 events.image_alt,
@@ -280,7 +284,7 @@ app.get("/api/events", async (req, res) => {
             FROM events
             INNER JOIN event_categories
                 ON events.category_id = event_categories.category_id
-            WHERE strftime('%Y', events.event_date) = ?
+            WHERE strftime('%Y', events.start_date) = ?
         `;
 
         const parameters = [String(selectedYear)];
@@ -294,7 +298,7 @@ app.get("/api/events", async (req, res) => {
         }
 
         sql += `
-            ORDER BY events.event_date, events.start_time
+            ORDER BY events.start_date, events.start_time
         `;
 
         const events = await getAll(sql, parameters);
@@ -303,11 +307,22 @@ app.get("/api/events", async (req, res) => {
         today.setHours(0, 0, 0, 0);
 
         const formattedEvents = events.map((event) => {
-            const eventDate = new Date(`${event.event_date}T00:00:00`);
+            const startDate = new Date(`${event.start_date}T00:00:00`);
+            const endDate = event.end_date
+                ? new Date(`${event.end_date}T00:00:00`)
+                : startDate;
+
+            let status = "Upcoming event";
+
+            if (endDate < today) {
+                status = "Past event";
+            } else if (startDate <= today && endDate >= today) {
+                status = "Currently running";
+            }
 
             return {
                 ...event,
-                status: eventDate < today ? "Past event" : "Upcoming event"
+                status
             };
         });
 

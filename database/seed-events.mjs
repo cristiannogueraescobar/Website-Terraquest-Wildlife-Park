@@ -2,160 +2,148 @@ import db, { getOne, runQuery } from "./database.mjs";
 
 const events = [
     {
-        category: "Conservation Workshop",
-        title: "Forest Guardian Workshop",
-        slug: "forest-guardian-workshop-2024",
-        short:
-            "Learn how conservation teams protect threatened forest species.",
-        full:
-            "Visitors take part in practical conservation activities, including habitat monitoring, identifying wildlife signs and understanding the threats faced by endangered forest animals.",
-        date: "2024-04-20",
-        time: "11:00",
-        location: "The Last Forest",
-        image: "forest-guardian-workshop.jpg",
-        alt: "A conservation ranger teaching visitors about forest wildlife"
+        category: "Educational Talk",
+        title: "Rhino Conservation Talk",
+        slug: "rhino-conservation-talk-2026",
+        short: "Learn how conservation teams protect rhinoceroses.",
+        full: "A TerraQuest ranger explains habitat protection, monitoring and anti-poaching work.",
+        type: "recurring",
+        startDate: "2026-01-01",
+        endDate: "2026-12-31",
+        time: "13:00",
+        recurrence: "Every Thursday",
+        day: "Thursday",
+        location: "The Golden Reserve",
+        image: "rhino-conservation-talk.jpg",
+        alt: "A ranger presenting information about rhinoceros conservation"
     },
     {
         category: "Family Activity",
-        title: "Junior Keeper Day",
-        slug: "junior-keeper-day-2024",
-        short:
-            "A supervised animal-care experience for younger visitors.",
-        full:
-            "Children learn how keepers prepare food, clean animal areas and monitor animal health through safe and supervised activities.",
-        date: "2024-08-17",
-        time: "10:30",
+        title: "Junior Keeper Workshop",
+        slug: "junior-keeper-workshop-2026",
+        short: "A supervised animal-care activity for younger visitors.",
+        full: "Children learn how keepers prepare food, check animal areas and follow hygiene rules.",
+        type: "recurring",
+        startDate: "2026-01-01",
+        endDate: "2026-12-31",
+        time: "11:00",
+        recurrence: "Every Saturday",
+        day: "Saturday",
         location: "Little Rangers Village",
-        image: "junior-keeper-day.jpg",
-        alt: "Children taking part in a supervised keeper activity"
+        image: "junior-keeper-workshop.jpg",
+        alt: "Children taking part in a supervised animal-care workshop"
+    },
+    {
+        category: "Conservation Workshop",
+        title: "River Rescue Activity",
+        slug: "river-rescue-activity-2026",
+        short: "Explore how pollution affects freshwater wildlife.",
+        full: "Visitors test water quality and learn how rivers and wetlands can be protected.",
+        type: "recurring",
+        startDate: "2026-01-01",
+        endDate: "2026-12-31",
+        time: "12:00",
+        recurrence: "Every Sunday",
+        day: "Sunday",
+        location: "River of Life",
+        image: "river-rescue-activity.jpg",
+        alt: "Visitors testing water quality during a river conservation activity"
     },
     {
         category: "Night Experience",
-        title: "Predators After Dark",
-        slug: "predators-after-dark-2024",
-        short:
-            "Discover how nocturnal predators behave after sunset.",
-        full:
-            "Visitors explore secure viewing areas with specialist guides and learn how predators use sound, movement and low light to hunt and communicate.",
-        date: "2024-10-26",
-        time: "19:30",
+        title: "Predator Night Watch",
+        slug: "predator-night-watch-2026",
+        short: "Observe predator behaviour during a guided evening experience.",
+        full: "Specialist keepers explain nocturnal behaviour, feeding routines and animal welfare.",
+        type: "recurring",
+        startDate: "2026-04-01",
+        endDate: "2026-10-31",
+        time: "19:00",
+        recurrence: "Every Friday evening",
+        day: "Friday",
         location: "Predator Territory",
-        image: "predators-after-dark.jpg",
+        image: "predator-night-watch.jpg",
         alt: "Visitors observing a predator during an evening experience"
     },
-
-    {
-        category: "Educational Talk",
-        title: "Saving the Black Rhino",
-        slug: "saving-the-black-rhino-2025",
-        short:
-            "A ranger talk about rhino conservation and habitat protection.",
-        full:
-            "Conservation specialists explain how monitoring, protected reserves and anti-poaching programmes help protect black rhinoceros populations.",
-        date: "2025-03-15",
-        time: "13:00",
-        location: "The Golden Reserve",
-        image: "saving-black-rhino.jpg",
-        alt: "A ranger presenting information about black rhinoceros conservation"
-    },
-    {
-        category: "Seasonal Celebration",
-        title: "Wetland Wildlife Festival",
-        slug: "wetland-wildlife-festival-2025",
-        short:
-            "A family event celebrating freshwater habitats and wildlife.",
-        full:
-            "The festival includes keeper talks, wildlife observation activities and interactive demonstrations about clean water and wetland conservation.",
-        date: "2025-06-21",
-        time: "10:00",
-        location: "River of Life",
-        image: "wetland-wildlife-festival.jpg",
-        alt: "Families attending a wetland wildlife conservation event"
-    },
-    {
-        category: "Family Activity",
-        title: "Little Rangers Autumn Trail",
-        slug: "little-rangers-autumn-trail-2025",
-        short:
-            "Follow an autumn trail and complete wildlife challenges.",
-        full:
-            "Young visitors follow clues, identify animal tracks and complete simple conservation tasks around Little Rangers Village.",
-        date: "2025-10-18",
-        time: "11:00",
-        location: "Little Rangers Village",
-        image: "autumn-ranger-trail.jpg",
-        alt: "Children following an autumn wildlife activity trail"
-    },
-
     {
         category: "Educational Talk",
         title: "Voices of the Last Forest",
         slug: "voices-of-the-last-forest-2026",
-        short:
-            "Discover how sound is used to monitor forest wildlife.",
-        full:
-            "Rangers explain how camera traps, audio recorders and field observations help conservation teams study rare species without disturbing them.",
-        date: "2026-02-14",
+        short: "Discover how sound is used to monitor rare forest animals.",
+        full: "Rangers demonstrate audio recorders, camera traps and wildlife tracking methods.",
+        type: "recurring",
+        startDate: "2026-02-01",
+        endDate: "2026-11-30",
         time: "14:00",
+        recurrence: "Every Tuesday",
+        day: "Tuesday",
         location: "The Last Forest",
         image: "voices-last-forest.jpg",
-        alt: "A ranger demonstrating forest wildlife monitoring equipment"
-    },
-    {
-        category: "Conservation Workshop",
-        title: "River Rescue Workshop",
-        slug: "river-rescue-workshop-2026",
-        short:
-            "Take part in activities focused on freshwater conservation.",
-        full:
-            "Visitors test water quality, identify pollution risks and learn how small actions can help protect rivers and wetlands.",
-        date: "2026-05-09",
-        time: "11:30",
-        location: "River of Life",
-        image: "river-rescue-workshop.jpg",
-        alt: "Visitors testing water quality during a conservation workshop"
-    },
-    {
-        category: "Family Activity",
-        title: "Wildlife Guardian Family Day",
-        slug: "wildlife-guardian-family-day-2026",
-        short:
-            "Complete conservation missions across the park.",
-        full:
-            "Families visit different habitats, complete wildlife challenges and learn how responsible choices can protect animals and ecosystems.",
-        date: "2026-07-25",
-        time: "10:00",
-        location: "Across TerraQuest",
-        image: "wildlife-guardian-day.jpg",
-        alt: "A family completing a wildlife conservation challenge"
-    },
-    {
-        category: "Night Experience",
-        title: "Predator Territory Night Watch",
-        slug: "predator-territory-night-watch-2026",
-        short:
-            "Observe predator behaviour during a guided evening experience.",
-        full:
-            "Specialist keepers guide visitors through secure observation areas and explain nocturnal behaviour, feeding patterns and predator welfare.",
-        date: "2026-09-19",
-        time: "19:00",
-        location: "Predator Territory",
-        image: "predator-night-watch.jpg",
-        alt: "A predator moving through its habitat during an evening event"
+        alt: "A ranger demonstrating wildlife monitoring equipment"
     },
     {
         category: "Seasonal Celebration",
         title: "Golden Reserve Conservation Weekend",
         slug: "golden-reserve-conservation-weekend-2026",
-        short:
-            "A weekend celebrating African wildlife conservation.",
-        full:
-            "The programme includes ranger talks, interactive displays and family activities focused on protecting savannah habitats and threatened species.",
-        date: "2026-11-14",
-        time: "10:30",
+        short: "A weekend celebrating African wildlife conservation.",
+        full: "The programme includes ranger talks, family activities and conservation displays.",
+        type: "special",
+        startDate: "2026-08-15",
+        endDate: "2026-08-16",
+        time: "10:00",
+        recurrence: null,
+        day: null,
         location: "The Golden Reserve",
         image: "golden-reserve-weekend.jpg",
         alt: "Visitors attending an African wildlife conservation event"
+    },
+    {
+        category: "Seasonal Celebration",
+        title: "Wetland Wildlife Festival",
+        slug: "wetland-wildlife-festival-2025",
+        short: "A past festival celebrating freshwater habitats.",
+        full: "The festival included keeper talks, wildlife observation and conservation demonstrations.",
+        type: "special",
+        startDate: "2025-06-21",
+        endDate: "2025-06-22",
+        time: "10:00",
+        recurrence: null,
+        day: null,
+        location: "River of Life",
+        image: "wetland-wildlife-festival.jpg",
+        alt: "Families attending a wetland wildlife festival"
+    },
+    {
+        category: "Family Activity",
+        title: "Little Rangers Animal Care",
+        slug: "little-rangers-animal-care-2025",
+        short: "A weekly supervised animal-care activity.",
+        full: "Children learned about grooming, feeding and respectful animal interaction.",
+        type: "recurring",
+        startDate: "2025-01-01",
+        endDate: "2025-12-31",
+        time: "11:30",
+        recurrence: "Every Saturday",
+        day: "Saturday",
+        location: "Little Rangers Village",
+        image: "animal-care-2025.jpg",
+        alt: "Children learning about animal care with a keeper"
+    },
+    {
+        category: "Night Experience",
+        title: "Predators After Dark",
+        slug: "predators-after-dark-2024",
+        short: "A past guided evening predator experience.",
+        full: "Visitors explored secure viewing areas and learned about nocturnal predators.",
+        type: "recurring",
+        startDate: "2024-05-01",
+        endDate: "2024-10-31",
+        time: "19:30",
+        recurrence: "Every Friday evening",
+        day: "Friday",
+        location: "Predator Territory",
+        image: "predators-after-dark.jpg",
+        alt: "Visitors observing a predator during an evening event"
     }
 ];
 
@@ -190,13 +178,17 @@ async function seedEvents() {
                             slug,
                             short_description,
                             full_description,
-                            event_date,
+                            event_type,
+                            start_date,
+                            end_date,
                             start_time,
+                            recurrence_text,
+                            day_of_week,
                             location,
                             image_filename,
                             image_alt
                         )
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     `,
                     [
                         category.category_id,
@@ -204,8 +196,12 @@ async function seedEvents() {
                         event.slug,
                         event.short,
                         event.full,
-                        event.date,
+                        event.type,
+                        event.startDate,
+                        event.endDate,
                         event.time,
+                        event.recurrence,
+                        event.day,
                         event.location,
                         event.image,
                         event.alt
@@ -214,7 +210,7 @@ async function seedEvents() {
             }
         }
 
-        console.log("Event data added successfully.");
+        console.log("Recurring and special event data added successfully.");
     } catch (error) {
         console.error("Unable to add event data:", error.message);
     } finally {

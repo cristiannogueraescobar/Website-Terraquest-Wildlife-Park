@@ -19,10 +19,41 @@ function createEventCard(event) {
     const article = document.createElement("article");
     article.className = "event-card";
 
-    const statusClass =
-        event.status === "Past event"
-            ? "event-status-past"
-            : "event-status-upcoming";
+    let statusClass = "event-status-upcoming";
+
+    if (event.status === "Past event") {
+        statusClass = "event-status-past";
+    } else if (event.status === "Currently running") {
+        statusClass = "event-status-current";
+    }
+
+    let scheduleText = "";
+
+    if (event.event_type === "recurring") {
+        scheduleText = `
+            <p class="event-schedule">
+                ${event.recurrence_text} at ${event.start_time}
+            </p>
+
+            <p class="event-date-range">
+                ${formatDate(event.start_date)}
+                to
+                ${formatDate(event.end_date)}
+            </p>
+        `;
+    } else {
+        const endDateText =
+            event.end_date && event.end_date !== event.start_date
+                ? ` to ${formatDate(event.end_date)}`
+                : "";
+
+        scheduleText = `
+            <p class="event-schedule">
+                ${formatDate(event.start_date)}${endDateText}
+                at ${event.start_time}
+            </p>
+        `;
+    }
 
     article.innerHTML = `
         <p class="event-category">${event.category_name}</p>
@@ -33,9 +64,7 @@ function createEventCard(event) {
 
         <h2>${event.title}</h2>
 
-        <p class="event-date">
-            ${formatDate(event.event_date)} at ${event.start_time}
-        </p>
+        ${scheduleText}
 
         <p class="event-location">${event.location}</p>
 

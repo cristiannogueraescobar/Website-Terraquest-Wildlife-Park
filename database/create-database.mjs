@@ -57,22 +57,27 @@ db.serialize(() => {
     `);
 
     db.run(`
-        CREATE TABLE IF NOT EXISTS events (
-            event_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            category_id INTEGER NOT NULL,
-            title TEXT NOT NULL,
-            slug TEXT NOT NULL UNIQUE,
-            short_description TEXT NOT NULL,
-            full_description TEXT NOT NULL,
-            event_date TEXT NOT NULL,
-            start_time TEXT NOT NULL,
-            location TEXT NOT NULL,
-            image_filename TEXT NOT NULL,
-            image_alt TEXT NOT NULL,
-            FOREIGN KEY (category_id)
-                REFERENCES event_categories(category_id)
-        )
-    `);
+    CREATE TABLE IF NOT EXISTS events (
+        event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        category_id INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        slug TEXT NOT NULL UNIQUE,
+        short_description TEXT NOT NULL,
+        full_description TEXT NOT NULL,
+        event_type TEXT NOT NULL
+            CHECK (event_type IN ('recurring', 'special')),
+        start_date TEXT NOT NULL,
+        end_date TEXT,
+        start_time TEXT NOT NULL,
+        recurrence_text TEXT,
+        day_of_week TEXT,
+        location TEXT NOT NULL,
+        image_filename TEXT NOT NULL,
+        image_alt TEXT NOT NULL,
+        FOREIGN KEY (category_id)
+            REFERENCES event_categories(category_id)
+    )
+`);
 
     db.run(`
         CREATE TABLE IF NOT EXISTS faqs (
