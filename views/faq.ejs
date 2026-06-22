@@ -1,0 +1,29 @@
+<%- include("partials/header") %>
+    <%- include("partials/navigation") %>
+
+        <main class="page-main">
+            <section class="page-introduction">
+                <p class="section-label">Visitor information</p>
+                <h1>Frequently asked questions</h1>
+
+                <p>
+                    Find useful information before exploring TerraQuest Wildlife
+                    Conservation Park.
+                </p>
+            </section>
+
+            <section class="faq-list" aria-label="Frequently asked questions">
+                <% faqs.forEach((faq)=> { %>
+                    <details class="faq-item">
+                        <summary>
+                            <%= faq.question %>
+                        </summary>
+                        <p>
+                            <%= faq.answer %>
+                        </p>
+                    </details>
+                    <% }) %>
+            </section>
+        </main>
+
+        <%- include("partials/footer") %>

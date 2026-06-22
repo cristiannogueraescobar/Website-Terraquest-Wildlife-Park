@@ -416,3 +416,28 @@ footer p {
         grid-template-columns: 1fr;
     }
 }
+
+.faq-list {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 1rem;
+    border: 1px solid #ccd8cf;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+}
+
+.faq-item summary {
+    padding: 1.25rem;
+    color: #123d2a;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.faq-item p {
+    margin: 0;
+    padding: 0 1.25rem 1.25rem;
+    text-align: left;
+}

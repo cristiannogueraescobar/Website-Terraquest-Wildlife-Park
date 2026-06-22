@@ -112,6 +112,27 @@ app.get("/experiences", async (req, res) => {
     }
 });
 
+app.get("/faq", async (req, res) => {
+    try {
+        const faqs = await getAll(`
+            SELECT
+                faq_id,
+                question,
+                answer
+            FROM faqs
+            ORDER BY display_order
+        `);
+
+        res.render("faq", {
+            pageTitle: "FAQ",
+            faqs
+        });
+    } catch (error) {
+        console.error("Unable to retrieve FAQs:", error.message);
+        res.status(500).send("Unable to load frequently asked questions.");
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);
 });
