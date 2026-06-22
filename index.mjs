@@ -386,6 +386,86 @@ app.get("/events/:slug", async (req, res) => {
     }
 });
 
+app.get("/api/search", async (req, res) => {
+    try {
+        const searchTerm = req.query.q?.trim();
+
+        if (!searchTerm || searchTerm.length < 2) {
+            return res.status(400).json({
+                success: false,
+                message: "Enter at least 2 characters."
+            });
+        }
+
+        const searchValue = `%${searchTerm}%`;
+
+        const habitats = await getAll(
+            `
+                SELECT
+                    name,
+                    slug,
+                    short_description
+                FROM habitats
+                WHERE name LIKE ?
+                OR short_description LIKE ?
+                OR full_description LIKE ?
+                ORDER BY name
+            `,
+            [searchValue, searchValue, searchValue]
+        );
+
+        const experiences = await getAll(
+            `
+                SELECT
+                    experiences.name,
+                    experiences.short_description,
+                    habitats.slug AS habitat_slug,
+                    habitats.name AS habitat_name
+                FROM experiences
+                INNER JOIN habitats
+                    ON experiences.habitat_id = habitats.habitat_id
+                WHERE experiences.name LIKE ?
+                OR experiences.short_description LIKE ?
+                OR experiences.full_description LIKE ?
+                ORDER BY experiences.name
+            `,
+            [searchValue, searchValue, searchValue]
+        );
+
+        const events = await getAll(
+            `
+                SELECT
+                    events.title,
+                    events.slug,
+                    events.short_description,
+                    event_categories.name AS category_name
+                FROM events
+                INNER JOIN event_categories
+                    ON events.category_id = event_categories.category_id
+                WHERE events.title LIKE ?
+                OR events.short_description LIKE ?
+                OR events.full_description LIKE ?
+                ORDER BY events.title
+            `,
+            [searchValue, searchValue, searchValue]
+        );
+
+        res.json({
+            success: true,
+            habitats,
+            experiences,
+            events
+        });
+    } catch (error) {
+        console.error("Unable to complete search:", error.message);
+
+        res.status(500).json({
+            success: false,
+            message: "Search could not be completed."
+        });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);
 });
