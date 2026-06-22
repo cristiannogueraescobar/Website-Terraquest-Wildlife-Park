@@ -13,31 +13,46 @@
                 </p>
             </section>
 
-            <section class="all-experiences-grid" aria-label="TerraQuest visitor experiences">
-                <% experiences.forEach((experience)=> { %>
-                    <article class="experience-card">
-                        <p class="experience-type">
-                            <%= experience.experience_type %>
-                        </p>
+            <section class="experience-filters" aria-labelledby="experience-filter-heading">
+                <h2 id="experience-filter-heading">Filter experiences</h2>
 
-                        <h2>
-                            <%= experience.name %>
-                        </h2>
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="experience-habitat">Habitat</label>
 
-                        <p class="experience-habitat">
-                            <%= experience.habitat_name %>
-                        </p>
+                        <select id="experience-habitat">
+                            <option value="">All habitats</option>
 
-                        <p>
-                            <%= experience.short_description %>
-                        </p>
+                            <% habitats.forEach((habitat)=> { %>
+                                <option value="<%= habitat.slug %>">
+                                    <%= habitat.name %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </div>
 
-                        <a class="card-link" href="/habitats/<%= experience.habitat_slug %>">
-                            Explore this habitat
-                        </a>
-                    </article>
-                    <% }) %>
+                    <div class="filter-group">
+                        <label for="experience-type">Experience type</label>
+
+                        <select id="experience-type">
+                            <option value="">All experience types</option>
+
+                            <% experienceTypes.forEach((type)=> { %>
+                                <option value="<%= type.experience_type %>">
+                                    <%= type.experience_type %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <p id="experiences-status" class="events-status" role="status" aria-live="polite"></p>
+
+            <section id="experiences-grid" class="all-experiences-grid" aria-label="TerraQuest visitor experiences">
             </section>
         </main>
+
+        <script src="/js/experiences.js" defer></script>
 
         <%- include("partials/footer") %>

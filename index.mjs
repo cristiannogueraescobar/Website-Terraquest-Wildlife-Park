@@ -88,26 +88,28 @@ app.get("/habitats/:slug", async (req, res) => {
 
 app.get("/experiences", async (req, res) => {
     try {
-        const experiences = await getAll(`
+        const habitats = await getAll(`
             SELECT
-                experiences.experience_id,
-                experiences.name,
-                experiences.experience_type,
-                experiences.short_description,
-                habitats.name AS habitat_name,
-                habitats.slug AS habitat_slug
+                name,
+                slug
+            FROM habitats
+            ORDER BY name
+        `);
+
+        const experienceTypes = await getAll(`
+            SELECT DISTINCT
+                experience_type
             FROM experiences
-            INNER JOIN habitats
-                ON experiences.habitat_id = habitats.habitat_id
-            ORDER BY habitats.habitat_id, experiences.experience_id
+            ORDER BY experience_type
         `);
 
         res.render("experiences", {
             pageTitle: "Experiences",
-            experiences
+            habitats,
+            experienceTypes
         });
     } catch (error) {
-        console.error("Unable to retrieve experiences:", error.message);
+        console.error("Unable to load experiences page:", error.message);
         res.status(500).send("Unable to load experiences.");
     }
 });
@@ -466,11 +468,69 @@ app.get("/api/search", async (req, res) => {
     }
 });
 
+app.get("/api/experiences", async (req, res) => {
+    try {
+        const selectedHabitat = req.query.habitat?.trim() || "";
+        const selectedType = req.query.type?.trim() || "";
+
+        let sql = `
+            SELECT
+                experiences.experience_id,
+                experiences.name,
+                experiences.experience_type,
+                experiences.short_description,
+                habitats.name AS habitat_name,
+                habitats.slug AS habitat_slug
+            FROM experiences
+            INNER JOIN habitats
+                ON experiences.habitat_id = habitats.habitat_id
+            WHERE 1 = 1
+        `;
+
+        const parameters = [];
+
+        if (selectedHabitat) {
+            sql += `
+                AND habitats.slug = ?
+            `;
+
+            parameters.push(selectedHabitat);
+        }
+
+        if (selectedType) {
+            sql += `
+                AND experiences.experience_type = ?
+            `;
+
+            parameters.push(selectedType);
+        }
+
+        sql += `
+            ORDER BY habitats.name, experiences.name
+        `;
+
+        const experiences = await getAll(sql, parameters);
+
+        res.json({
+            success: true,
+            experiences
+        });
+    } catch (error) {
+        console.error("Unable to retrieve experiences:", error.message);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to retrieve experiences."
+        });
+    }
+});
+
 app.use((req, res) => {
     res.status(404).render("404", {
         pageTitle: "Page Not Found"
     });
 });
+
 
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);
