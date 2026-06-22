@@ -1226,3 +1226,154 @@ footer p {
         font-size: 0.95rem;
     }
 }
+
+/* Individual habitat detail pages */
+
+.habitat-detail-main {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    text-align: initial;
+}
+
+.habitat-detail-hero {
+    display: flex;
+    align-items: center;
+    min-height: 540px;
+    padding: 5rem 1.5rem;
+    color: var(--white);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.habitat-detail-hero-content {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    text-align: left;
+}
+
+.habitat-detail-hero-content>* {
+    max-width: 620px;
+}
+
+.habitat-detail-hero .section-label {
+    margin: 0 0 0.9rem;
+    color: #ffd2a1;
+}
+
+.habitat-detail-hero h1 {
+    margin: 0;
+    color: var(--white);
+    font-size: clamp(3.2rem, 7vw, 6rem);
+    line-height: 0.96;
+    text-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.35);
+}
+
+.habitat-detail-hero .habitat-description {
+    margin: 1.5rem 0 0;
+    color: #edf4ef;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    text-shadow: 0 0.15rem 0.5rem rgba(0, 0, 0, 0.35);
+}
+
+.habitat-back-link {
+    display: inline-block;
+    margin-top: 1.8rem;
+    padding: 0.75rem 1.1rem;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    border-radius: 999px;
+    color: var(--white);
+    font-weight: 800;
+    text-decoration: none;
+    background-color: rgba(15, 47, 36, 0.28);
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.habitat-back-link:hover,
+.habitat-back-link:focus-visible {
+    color: var(--forest-deep);
+    border-color: var(--white);
+    background-color: var(--white);
+    transform: translateY(-2px);
+}
+
+.habitat-experiences {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+}
+
+.habitat-experiences .section-heading {
+    margin-bottom: 2.5rem;
+}
+
+.habitat-experiences .section-heading h2 {
+    margin-top: 0;
+    color: var(--forest-deep);
+}
+
+.habitat-experiences .experience-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+    border-top: 5px solid var(--amber);
+    border-radius: 1rem;
+    background-color: var(--cream);
+    box-shadow: var(--shadow-soft);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.habitat-experiences .experience-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2.2rem rgba(15, 47, 36, 0.16);
+}
+
+.habitat-experiences .experience-card h3 {
+    margin-top: 0.5rem;
+    color: var(--forest-deep);
+    font-size: 1.45rem;
+}
+
+.habitat-experiences .experience-card>p:last-child {
+    color: var(--text-muted);
+}
+
+@media (max-width: 760px) {
+    .habitat-detail-hero {
+        min-height: 620px;
+        align-items: flex-end;
+        padding: 4rem 1.5rem;
+        background-position: 65% center;
+    }
+
+    .habitat-detail-hero-content {
+        text-align: center;
+    }
+
+    .habitat-detail-hero-content>* {
+        max-width: 100%;
+    }
+
+    .habitat-detail-hero .habitat-description {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .habitat-detail-hero h1 {
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
+    }
+
+    .habitat-experiences {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
