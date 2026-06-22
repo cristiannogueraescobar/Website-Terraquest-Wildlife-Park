@@ -86,6 +86,32 @@ app.get("/habitats/:slug", async (req, res) => {
     }
 });
 
+app.get("/experiences", async (req, res) => {
+    try {
+        const experiences = await getAll(`
+            SELECT
+                experiences.experience_id,
+                experiences.name,
+                experiences.experience_type,
+                experiences.short_description,
+                habitats.name AS habitat_name,
+                habitats.slug AS habitat_slug
+            FROM experiences
+            INNER JOIN habitats
+                ON experiences.habitat_id = habitats.habitat_id
+            ORDER BY habitats.habitat_id, experiences.experience_id
+        `);
+
+        res.render("experiences", {
+            pageTitle: "Experiences",
+            experiences
+        });
+    } catch (error) {
+        console.error("Unable to retrieve experiences:", error.message);
+        res.status(500).send("Unable to load experiences.");
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);
 });

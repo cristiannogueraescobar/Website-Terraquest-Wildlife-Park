@@ -1,0 +1,43 @@
+<%- include("partials/header") %>
+    <%- include("partials/navigation") %>
+
+        <main class="page-main">
+            <section class="page-introduction">
+                <p class="section-label">Explore and learn</p>
+
+                <h1>Park experiences</h1>
+
+                <p>
+                    Discover wildlife exhibits, educational talks, adventure trails
+                    and supervised family activities across TerraQuest.
+                </p>
+            </section>
+
+            <section class="all-experiences-grid" aria-label="TerraQuest visitor experiences">
+                <% experiences.forEach((experience)=> { %>
+                    <article class="experience-card">
+                        <p class="experience-type">
+                            <%= experience.experience_type %>
+                        </p>
+
+                        <h2>
+                            <%= experience.name %>
+                        </h2>
+
+                        <p class="experience-habitat">
+                            <%= experience.habitat_name %>
+                        </p>
+
+                        <p>
+                            <%= experience.short_description %>
+                        </p>
+
+                        <a class="card-link" href="/habitats/<%= experience.habitat_slug %>">
+                            Explore this habitat
+                        </a>
+                    </article>
+                    <% }) %>
+            </section>
+        </main>
+
+        <%- include("partials/footer") %>
