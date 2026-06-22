@@ -1,7 +1,7 @@
-import { getAll } from "./database/database.mjs";
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { getAll, getOne } from "./database/database.mjs";
 
 const app = express();
 const PORT = 5000;
@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
         pageTitle: "Home"
     });
 });
+
 app.get("/habitats", async (req, res) => {
     try {
         const habitats = await getAll(`
@@ -44,6 +45,47 @@ app.get("/habitats", async (req, res) => {
         res.status(500).send("Unable to load habitats.");
     }
 });
+
+app.get("/habitats/:slug", async (req, res) => {
+    try {
+        const habitat = await getOne(
+            `
+                SELECT *
+                FROM habitats
+                WHERE slug = ?
+            `,
+            [req.params.slug]
+        );
+
+        if (!habitat) {
+            return res.status(404).send("Habitat not found.");
+        }
+
+        const experiences = await getAll(
+            `
+                SELECT
+                    experience_id,
+                    name,
+                    experience_type,
+                    short_description
+                FROM experiences
+                WHERE habitat_id = ?
+                ORDER BY experience_id
+            `,
+            [habitat.habitat_id]
+        );
+
+        res.render("habitat-details", {
+            pageTitle: habitat.name,
+            habitat,
+            experiences
+        });
+    } catch (error) {
+        console.error("Unable to retrieve habitat:", error.message);
+        res.status(500).send("Unable to load habitat.");
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);
 });

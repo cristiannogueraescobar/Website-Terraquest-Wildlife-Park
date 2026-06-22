@@ -322,3 +322,69 @@ footer p {
         grid-template-columns: 1fr;
     }
 }
+
+.habitat-hero {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 3rem 0 4rem;
+    text-align: center;
+}
+
+.habitat-description {
+    max-width: 750px;
+    margin: 1.5rem auto;
+    font-size: 1.1rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #123d2a;
+    font-weight: 700;
+}
+
+.experiences-section {
+    padding-top: 2rem;
+}
+
+.section-heading {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section-heading h2 {
+    color: #123d2a;
+    font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.experience-card {
+    padding: 2rem;
+    border-top: 5px solid #e8bd4c;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-shadow: 0 0.5rem 1.5rem rgba(18, 61, 42, 0.1);
+}
+
+.experience-card h3 {
+    color: #123d2a;
+}
+
+.experience-type {
+    color: #7a5b0e;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 800px) {
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+}
