@@ -1,0 +1,56 @@
+<%- include("partials/header") %>
+    <%- include("partials/navigation") %>
+
+        <main class="page-main">
+            <section class="page-introduction">
+                <p class="section-label">Explore the programme</p>
+
+                <h1>TerraQuest events</h1>
+
+                <p>
+                    Discover conservation workshops, family activities,
+                    educational talks and special wildlife experiences.
+                </p>
+            </section>
+
+            <section class="event-filters" aria-labelledby="event-filter-heading">
+                <h2 id="event-filter-heading">Filter events</h2>
+
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="event-year">Year</label>
+
+                        <select id="event-year">
+                            <option value="2026" <%=currentYear===2026 ? "selected" : "" %>>
+                                2026
+                            </option>
+
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="event-category">Category</label>
+
+                        <select id="event-category">
+                            <option value="">All categories</option>
+
+                            <% categories.forEach((category)=> { %>
+                                <option value="<%= category.slug %>">
+                                    <%= category.name %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <p id="events-status" class="events-status" role="status" aria-live="polite"></p>
+
+            <section id="events-grid" class="events-grid" aria-label="TerraQuest events"></section>
+        </main>
+
+        <script src="/js/events.js" defer></script>
+
+        <%- include("partials/footer") %>

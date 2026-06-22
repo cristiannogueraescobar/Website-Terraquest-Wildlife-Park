@@ -230,6 +230,101 @@ app.get("/activity", (req, res) => {
     });
 });
 
+app.get("/events", async (req, res) => {
+    try {
+        const categories = await getAll(`
+            SELECT
+                category_id,
+                name,
+                slug
+            FROM event_categories
+            ORDER BY name
+        `);
+
+        res.render("events", {
+            pageTitle: "Events",
+            categories,
+            currentYear: new Date().getFullYear()
+        });
+    } catch (error) {
+        console.error("Unable to load events page:", error.message);
+        res.status(500).send("Unable to load events.");
+    }
+});
+
+app.get("/api/events", async (req, res) => {
+    try {
+        const selectedYear = Number.parseInt(req.query.year, 10);
+        const selectedCategory = req.query.category?.trim() || "";
+
+        if (!Number.isInteger(selectedYear)) {
+            return res.status(400).json({
+                success: false,
+                message: "A valid year is required."
+            });
+        }
+
+        let sql = `
+            SELECT
+                events.event_id,
+                events.title,
+                events.slug,
+                events.short_description,
+                events.event_date,
+                events.start_time,
+                events.location,
+                events.image_filename,
+                events.image_alt,
+                event_categories.name AS category_name,
+                event_categories.slug AS category_slug
+            FROM events
+            INNER JOIN event_categories
+                ON events.category_id = event_categories.category_id
+            WHERE strftime('%Y', events.event_date) = ?
+        `;
+
+        const parameters = [String(selectedYear)];
+
+        if (selectedCategory) {
+            sql += `
+                AND event_categories.slug = ?
+            `;
+
+            parameters.push(selectedCategory);
+        }
+
+        sql += `
+            ORDER BY events.event_date, events.start_time
+        `;
+
+        const events = await getAll(sql, parameters);
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const formattedEvents = events.map((event) => {
+            const eventDate = new Date(`${event.event_date}T00:00:00`);
+
+            return {
+                ...event,
+                status: eventDate < today ? "Past event" : "Upcoming event"
+            };
+        });
+
+        res.json({
+            success: true,
+            events: formattedEvents
+        });
+    } catch (error) {
+        console.error("Unable to retrieve events:", error.message);
+
+        res.status(500).json({
+            success: false,
+            message: "Unable to retrieve events."
+        });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`TerraQuest server running at http://localhost:${PORT}`);
 });
