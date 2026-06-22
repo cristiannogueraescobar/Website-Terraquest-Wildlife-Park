@@ -1,12 +1,79 @@
 <%- include("partials/header") %>
     <%- include("partials/navigation") %>
 
-        <main>
-            <h1>TerraQuest Eco Adventure Park</h1>
+        <main class="home-main">
+            <section class="hero">
+                <div class="hero-content">
+                    <p class="hero-eyebrow">
+                        Wildlife · Adventure · Conservation
+                    </p>
 
-            <p>
-                Discover wildlife, outdoor adventures and conservation experiences.
-            </p>
+                    <h1>Explore the wild. Protect the future.</h1>
+
+                    <p class="hero-description">
+                        Discover immersive wildlife habitats, outdoor adventures
+                        and conservation experiences for the whole family.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="primary-button" href="#discover">
+                            Discover the park
+                        </a>
+
+                        <a class="secondary-button" href="#opening-hours">
+                            Plan your visit
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="discover" class="introduction-section">
+                <div class="section-container">
+                    <p class="section-label">Welcome to TerraQuest</p>
+
+                    <h2>A wildlife park built for discovery</h2>
+
+                    <p>
+                        Journey through extraordinary habitats, meet fascinating
+                        animals and take part in experiences that inspire visitors
+                        to care for the natural world.
+                    </p>
+
+                    <div class="feature-grid">
+                        <article class="feature-card">
+                            <h3>Wildlife habitats</h3>
+                            <p>
+                                Explore environments inspired by rainforests,
+                                savannahs, wetlands and reptile ecosystems.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <h3>Outdoor adventures</h3>
+                            <p>
+                                Take part in interactive trails, observation
+                                experiences and family-friendly challenges.
+                            </p>
+                        </article>
+
+                        <article class="feature-card">
+                            <h3>Conservation</h3>
+                            <p>
+                                Learn how small actions can help protect animals,
+                                habitats and the planet.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="opening-hours" class="hours-section">
+                <div>
+                    <p class="section-label">Plan your adventure</p>
+                    <h2>Open every day</h2>
+                    <p>Visit TerraQuest daily from <strong>9:00am to 6:00pm</strong>.</p>
+                </div>
+            </section>
         </main>
 
         <%- include("partials/footer") %>

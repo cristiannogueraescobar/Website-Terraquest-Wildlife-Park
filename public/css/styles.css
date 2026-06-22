@@ -154,3 +154,125 @@ footer p {
         gap: 0.9rem;
     }
 }
+
+.home-main {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+}
+
+.hero {
+    display: grid;
+    min-height: 70vh;
+    place-items: center;
+    padding: 5rem 1.5rem;
+    color: #ffffff;
+    text-align: center;
+    background:
+        linear-gradient(rgba(8, 38, 25, 0.82), rgba(8, 38, 25, 0.82)),
+        linear-gradient(135deg, #286343, #102f20);
+}
+
+.hero-content {
+    width: min(760px, 100%);
+}
+
+.hero-eyebrow,
+.section-label {
+    margin-bottom: 0.8rem;
+    color: #e8bd4c;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1;
+}
+
+.hero-description {
+    margin: 1.5rem auto 0;
+    font-size: 1.2rem;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.primary-button,
+.secondary-button {
+    display: inline-block;
+    padding: 0.85rem 1.3rem;
+    border-radius: 0.35rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.primary-button {
+    color: #172219;
+    background-color: #e8bd4c;
+}
+
+.secondary-button {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+}
+
+.introduction-section {
+    padding: 5rem 1.5rem;
+}
+
+.section-container {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+}
+
+.introduction-section h2,
+.hours-section h2 {
+    margin-top: 0;
+    color: #123d2a;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    padding: 2rem;
+    text-align: left;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(18, 61, 42, 0.1);
+}
+
+.feature-card h3 {
+    color: #123d2a;
+}
+
+.hours-section {
+    padding: 4rem 1.5rem;
+    text-align: center;
+    background-color: #dce8df;
+}
+
+@media (max-width: 750px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}
