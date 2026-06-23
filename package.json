@@ -1,15 +1,14 @@
 {
   "name": "terraquest-wildlife-park",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A full-stack promotional website for TerraQuest Wildlife Conservation Park.",
+  "main": "index.mjs",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.mjs"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Cristian Noguera",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "ejs": "^6.0.1",
     "express": "^5.2.1",
