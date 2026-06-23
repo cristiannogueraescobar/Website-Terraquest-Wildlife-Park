@@ -38,18 +38,25 @@
 
                 <div class="experience-grid">
                     <% experiences.forEach((experience)=> { %>
-                        <article class="experience-card">
-                            <p class="experience-type">
-                                <%= experience.experience_type %>
-                            </p>
+                        <article class="experience-card experience-image-card">
+                            <div class="experience-card-image-wrapper">
+                                <img class="experience-card-image" src="/images/<%= experience.image_filename %>"
+                                    alt="<%= experience.image_alt %>" loading="lazy">
+                            </div>
 
-                            <h3>
-                                <%= experience.name %>
-                            </h3>
+                            <div class="experience-card-content">
+                                <p class="experience-type">
+                                    <%= experience.experience_type %>
+                                </p>
 
-                            <p>
-                                <%= experience.short_description %>
-                            </p>
+                                <h3>
+                                    <%= experience.name %>
+                                </h3>
+
+                                <p>
+                                    <%= experience.short_description %>
+                                </p>
+                            </div>
                         </article>
                         <% }) %>
                 </div>

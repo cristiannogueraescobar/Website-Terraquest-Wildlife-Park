@@ -67,7 +67,10 @@ app.get("/habitats/:slug", async (req, res) => {
                     experience_id,
                     name,
                     experience_type,
-                    short_description
+                    short_description,
+                    full_description,
+                    image_filename,
+                    image_alt
                 FROM experiences
                 WHERE habitat_id = ?
                 ORDER BY experience_id
@@ -81,8 +84,14 @@ app.get("/habitats/:slug", async (req, res) => {
             experiences
         });
     } catch (error) {
-        console.error("Unable to retrieve habitat:", error.message);
-        res.status(500).send("Unable to load habitat.");
+        console.error(
+            "Unable to retrieve habitat:",
+            error.message
+        );
+
+        res.status(500).send(
+            "Unable to load habitat."
+        );
     }
 });
 
