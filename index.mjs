@@ -480,7 +480,9 @@ app.get("/api/experiences", async (req, res) => {
                 experiences.experience_type,
                 experiences.short_description,
                 habitats.name AS habitat_name,
-                habitats.slug AS habitat_slug
+                habitats.slug AS habitat_slug,
+                experiences.image_filename,
+                experiences.image_alt
             FROM experiences
             INNER JOIN habitats
                 ON experiences.habitat_id = habitats.habitat_id

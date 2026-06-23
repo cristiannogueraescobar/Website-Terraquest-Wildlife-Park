@@ -7,28 +7,53 @@ const experiencesStatus = document.querySelector("#experiences-status");
 
 function createExperienceCard(experience) {
     const article = document.createElement("article");
-    article.className = "experience-card";
+    article.className = "experience-card experience-image-card";
 
-    article.innerHTML = `
-        <p class="experience-type">
-            ${experience.experience_type}
-        </p>
+    const imageWrapper = document.createElement("div");
+    imageWrapper.className = "experience-card-image-wrapper";
 
-        <h2>${experience.name}</h2>
+    const image = document.createElement("img");
+    image.className = "experience-card-image";
+    image.src = `/images/${experience.image_filename}`;
+    image.alt = experience.image_alt;
+    image.loading = "lazy";
 
-        <p class="experience-habitat">
-            ${experience.habitat_name}
-        </p>
+    imageWrapper.appendChild(image);
 
-        <p>${experience.short_description}</p>
+    const content = document.createElement("div");
+    content.className = "experience-card-content";
 
-        <a
-            class="card-link"
-            href="/habitats/${experience.habitat_slug}"
-        >
-            Explore this habitat
-        </a>
-    `;
+    const type = document.createElement("p");
+    type.className = "experience-type";
+    type.textContent = experience.experience_type;
+
+    const heading = document.createElement("h2");
+    heading.textContent = experience.name;
+
+    const habitat = document.createElement("p");
+    habitat.className = "experience-habitat";
+    habitat.textContent = experience.habitat_name;
+
+    const description = document.createElement("p");
+    description.textContent = experience.short_description;
+
+    const link = document.createElement("a");
+    link.className = "card-link";
+    link.href = `/habitats/${experience.habitat_slug}`;
+    link.textContent = "Explore this habitat";
+
+    content.append(
+        type,
+        heading,
+        habitat,
+        description,
+        link
+    );
+
+    article.append(
+        imageWrapper,
+        content
+    );
 
     return article;
 }
