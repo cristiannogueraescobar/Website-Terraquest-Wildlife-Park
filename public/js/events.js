@@ -17,7 +17,7 @@ function formatDate(dateString) {
 
 function createEventCard(event) {
     const article = document.createElement("article");
-    article.className = "event-card";
+    article.className = "event-card event-image-card";
 
     let statusClass = "event-status-upcoming";
 
@@ -55,24 +55,52 @@ function createEventCard(event) {
         `;
     }
 
+    const imageFilename =
+        event.image_filename || "terraquest-placeholder.png";
+
+    const imageAlt =
+        event.image_alt || `${event.title} at TerraQuest`;
+
     article.innerHTML = `
-        <p class="event-category">${event.category_name}</p>
+        <div class="event-card-image-wrapper">
+            <img
+                class="event-card-image"
+                src="/images/${imageFilename}"
+                alt="${imageAlt}"
+                loading="lazy"
+            >
+        </div>
 
-        <p class="event-status ${statusClass}">
-            ${event.status}
-        </p>
+        <div class="event-card-content">
+            <div class="event-card-meta">
+                <p class="event-category">
+                    ${event.category_name}
+                </p>
 
-        <h2>${event.title}</h2>
+                <p class="event-status ${statusClass}">
+                    ${event.status}
+                </p>
+            </div>
 
-        ${scheduleText}
+            <h2>${event.title}</h2>
 
-        <p class="event-location">${event.location}</p>
+            ${scheduleText}
 
-        <p>${event.short_description}</p>
+            <p class="event-location">
+                ${event.location}
+            </p>
 
-        <a class="card-link" href="/events/${event.slug}">
-            View event details
-        </a>
+            <p class="event-description">
+                ${event.short_description}
+            </p>
+
+            <a
+                class="card-link"
+                href="/events/${event.slug}"
+            >
+                View event details
+            </a>
+        </div>
     `;
 
     return article;
@@ -91,11 +119,16 @@ async function loadEvents() {
     });
 
     try {
-        const response = await fetch(`/api/events?${query.toString()}`);
+        const response = await fetch(
+            `/api/events?${query.toString()}`
+        );
+
         const result = await response.json();
 
         if (!response.ok) {
-            throw new Error(result.message);
+            throw new Error(
+                result.message || "Unable to load events."
+            );
         }
 
         if (result.events.length === 0) {
@@ -105,13 +138,21 @@ async function loadEvents() {
         }
 
         result.events.forEach((event) => {
-            eventsGrid.appendChild(createEventCard(event));
+            eventsGrid.appendChild(
+                createEventCard(event)
+            );
         });
 
+        const eventWord =
+            result.events.length === 1 ? "event" : "events";
+
         eventsStatus.textContent =
-            `${result.events.length} event${result.events.length === 1 ? "" : "s"} found.`;
+            `${result.events.length} ${eventWord} found.`;
     } catch (error) {
-        console.error("Unable to load events:", error);
+        console.error(
+            "Unable to load events:",
+            error
+        );
 
         eventsStatus.textContent =
             "Events could not be loaded. Please try again.";

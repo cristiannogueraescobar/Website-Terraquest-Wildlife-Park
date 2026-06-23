@@ -1494,3 +1494,124 @@ footer p {
         margin-top: 1rem;
     }
 }
+
+/* Event image cards */
+
+.event-image-card {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    padding: 0;
+    border: 1px solid var(--border-soft);
+    border-radius: 1rem;
+    background-color: var(--cream);
+    box-shadow: var(--shadow-soft);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.event-image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2.2rem rgba(15, 47, 36, 0.16);
+}
+
+.event-card-image-wrapper {
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background-color: var(--forest-soft);
+}
+
+.event-card-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.event-image-card:hover .event-card-image {
+    transform: scale(1.04);
+}
+
+.event-card-content {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.event-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.event-card-meta .event-category,
+.event-card-meta .event-status {
+    margin: 0;
+}
+
+.event-card-content h2 {
+    margin: 0;
+    color: var(--forest-deep);
+    font-size: 1.45rem;
+    line-height: 1.2;
+}
+
+.event-card-content .event-schedule {
+    margin: 1rem 0 0;
+    color: var(--charcoal);
+    font-size: 0.95rem;
+    font-weight: 800;
+}
+
+.event-card-content .event-date-range {
+    margin: 0.3rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.event-card-content .event-location {
+    margin: 0.8rem 0 0;
+    color: var(--amber-dark);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.event-card-content .event-description {
+    margin: 0.8rem 0 1.2rem;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.event-card-content .card-link {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    color: var(--forest-deep);
+    font-weight: 800;
+    text-decoration: none;
+    border-bottom: 2px solid var(--amber);
+}
+
+.event-card-content .card-link:hover,
+.event-card-content .card-link:focus-visible {
+    color: var(--amber-dark);
+}
+
+@media (max-width: 700px) {
+    .event-card-meta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .event-card-content {
+        padding: 1.25rem;
+    }
+}

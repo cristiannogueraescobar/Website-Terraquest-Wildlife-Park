@@ -1,4 +1,7 @@
-import db, { getOne, runQuery } from "./database.mjs";
+import db, {
+    getOne,
+    runQuery
+} from "./database.mjs";
 
 const events = [
     {
@@ -14,8 +17,8 @@ const events = [
         recurrence: "Every Thursday",
         day: "Thursday",
         location: "The Golden Reserve",
-        image: "rhino-conservation-talk.jpg",
-        alt: "A ranger presenting information about rhinoceros conservation"
+        image: "rhino-conservation-talk.png",
+        alt: "A ranger presenting rhinoceros conservation work and field monitoring"
     },
     {
         category: "Family Activity",
@@ -30,8 +33,8 @@ const events = [
         recurrence: "Every Saturday",
         day: "Saturday",
         location: "Little Rangers Village",
-        image: "junior-keeper-workshop.jpg",
-        alt: "Children taking part in a supervised animal-care workshop"
+        image: "junior-keeper-workshop.png",
+        alt: "Children taking part in a supervised junior keeper workshop"
     },
     {
         category: "Conservation Workshop",
@@ -46,8 +49,8 @@ const events = [
         recurrence: "Every Sunday",
         day: "Sunday",
         location: "River of Life",
-        image: "river-rescue-activity.jpg",
-        alt: "Visitors testing water quality during a river conservation activity"
+        image: "river-rescue-activity.png",
+        alt: "Families taking part in river cleanup, water testing and habitat restoration"
     },
     {
         category: "Night Experience",
@@ -62,8 +65,8 @@ const events = [
         recurrence: "Every Friday evening",
         day: "Friday",
         location: "Predator Territory",
-        image: "predator-night-watch.jpg",
-        alt: "Visitors observing a predator during an evening experience"
+        image: "predator-night-watch.png",
+        alt: "Visitors using night observation equipment during a guided predator event"
     },
     {
         category: "Educational Talk",
@@ -78,8 +81,8 @@ const events = [
         recurrence: "Every Tuesday",
         day: "Tuesday",
         location: "The Last Forest",
-        image: "voices-last-forest.jpg",
-        alt: "A ranger demonstrating wildlife monitoring equipment"
+        image: "voices-of-the-last-forest.png",
+        alt: "A ranger demonstrating forest bioacoustics and wildlife monitoring equipment"
     },
     {
         category: "Seasonal Celebration",
@@ -94,8 +97,8 @@ const events = [
         recurrence: null,
         day: null,
         location: "The Golden Reserve",
-        image: "golden-reserve-weekend.jpg",
-        alt: "Visitors attending an African wildlife conservation event"
+        image: "golden-reserve-conservation-weekend.png",
+        alt: "Visitors attending talks, activities and conservation displays in the reserve"
     },
     {
         category: "Seasonal Celebration",
@@ -110,8 +113,8 @@ const events = [
         recurrence: null,
         day: null,
         location: "River of Life",
-        image: "wetland-wildlife-festival.jpg",
-        alt: "Families attending a wetland wildlife festival"
+        image: "wetland-wildlife-festival.png",
+        alt: "Families exploring wetland wildlife activities and observation areas"
     },
     {
         category: "Family Activity",
@@ -126,8 +129,8 @@ const events = [
         recurrence: "Every Saturday",
         day: "Saturday",
         location: "Little Rangers Village",
-        image: "animal-care-2025.jpg",
-        alt: "Children learning about animal care with a keeper"
+        image: "little-rangers-animal-care.png",
+        alt: "Children learning grooming, feeding and animal wellbeing"
     },
     {
         category: "Night Experience",
@@ -142,13 +145,17 @@ const events = [
         recurrence: "Every Friday evening",
         day: "Friday",
         location: "Predator Territory",
-        image: "predators-after-dark.jpg",
-        alt: "Visitors observing a predator during an evening event"
+        image: "predators-after-dark.png",
+        alt: "Visitors following a misty illuminated route through a nocturnal predator habitat"
     }
 ];
 
 async function seedEvents() {
     try {
+        await runQuery("BEGIN TRANSACTION");
+
+        await runQuery("DELETE FROM events");
+
         for (const event of events) {
             const category = await getOne(
                 `
@@ -160,59 +167,66 @@ async function seedEvents() {
             );
 
             if (!category) {
-                console.warn(`Category not found: ${event.category}`);
-                continue;
-            }
-
-            const existingEvent = await getOne(
-                "SELECT event_id FROM events WHERE slug = ?",
-                [event.slug]
-            );
-
-            if (!existingEvent) {
-                await runQuery(
-                    `
-                        INSERT INTO events (
-                            category_id,
-                            title,
-                            slug,
-                            short_description,
-                            full_description,
-                            event_type,
-                            start_date,
-                            end_date,
-                            start_time,
-                            recurrence_text,
-                            day_of_week,
-                            location,
-                            image_filename,
-                            image_alt
-                        )
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    `,
-                    [
-                        category.category_id,
-                        event.title,
-                        event.slug,
-                        event.short,
-                        event.full,
-                        event.type,
-                        event.startDate,
-                        event.endDate,
-                        event.time,
-                        event.recurrence,
-                        event.day,
-                        event.location,
-                        event.image,
-                        event.alt
-                    ]
+                throw new Error(
+                    `Category not found: ${event.category}`
                 );
             }
+
+            await runQuery(
+                `
+                    INSERT INTO events (
+                        category_id,
+                        title,
+                        slug,
+                        short_description,
+                        full_description,
+                        event_type,
+                        start_date,
+                        end_date,
+                        start_time,
+                        recurrence_text,
+                        day_of_week,
+                        location,
+                        image_filename,
+                        image_alt
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                `,
+                [
+                    category.category_id,
+                    event.title,
+                    event.slug,
+                    event.short,
+                    event.full,
+                    event.type,
+                    event.startDate,
+                    event.endDate,
+                    event.time,
+                    event.recurrence,
+                    event.day,
+                    event.location,
+                    event.image,
+                    event.alt
+                ]
+            );
         }
 
-        console.log("Recurring and special event data added successfully.");
+        await runQuery("COMMIT");
+
+        console.log(
+            `${events.length} events replaced successfully.`
+        );
     } catch (error) {
-        console.error("Unable to add event data:", error.message);
+        try {
+            await runQuery("ROLLBACK");
+        } catch {
+            // No active transaction to roll back.
+        }
+
+        console.error(
+            "Unable to replace event data:",
+            error.message
+        );
     } finally {
         db.close();
     }
